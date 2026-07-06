@@ -1,4 +1,4 @@
-# Security and Privacy deadlines countdown
+# Aviation Conference deadlines countdown
 
 Based on [ai-deadlines](https://aideadlin.es) by @abshkdz
 
