@@ -2,8 +2,9 @@
   description: OpenSky Symposium
   year: 2026
   link: https://symposium.opensky-network.org/
+  abstract_deadline: "2026-07-31 20:00"
   deadline:
-    - "2026-07-31 20:00"
+    - "2026-10-22 20:00"
   date: "October 29-30"
   place: Madrid, Spain
 
@@ -11,6 +12,7 @@
   description: AIAA SciTech Forum
   year: 2027
   link: https://scitech.aiaa.org/
+  abstract_deadline: "2026-05-21 20:00"
   deadline:
     - "2026-05-21 20:00"
   comment: Extended abstract submission deadline (ET).
@@ -21,6 +23,7 @@
   description: AIAA AVIATION Forum
   year: 2027
   link: https://www.aiaa.org/aviation
+  abstract_deadline: "2026-05-21 20:00"
   deadline:
     - "2027-02-05 20:00"
   date: "June 2027"
@@ -30,6 +33,7 @@
   description: IEEE/AIAA Digital Avionics Systems Conference
   year: 2026
   link: https://2026.dasconline.org/
+  abstract_deadline: "2026-05-21 20:00"
   deadline:
     - "2026-03-02 23:59"
   date: "September 15-17"
@@ -39,6 +43,7 @@
   description: Integrated Communications, Navigation and Surveillance Conference
   year: 2027
   link: https://i-cns.org/
+  abstract_deadline: 
   deadline:
     - "2027-03-02 23:59"
   comment: Full paper deadline.
@@ -49,6 +54,7 @@
   description: US-Europe Air Transportation Research and Development Symposium
   year: 2027
   link: https://atrds.org/
+  abstract_deadline: 
   deadline:
     - "2027-02-16 23:59"
   comment: Estimated based on previous symposium.
@@ -59,6 +65,7 @@
   description: SESAR Innovation Days
   year: 2026
   link: https://www.sesarju.eu/SID2026
+  abstract_deadline: 
   deadline:
     - "2026-09-21 23:59"
   date: "December 2026"
@@ -68,6 +75,7 @@
   description: Aviation Innovation Conference for Asia Pacific
   year: 2027
   link: https://event.ntu.edu.sg/AICAP-2027
+  abstract_deadline: 
   deadline:
     - "2026-10-15 23:59"
   date: "January 2027"
@@ -77,6 +85,7 @@
   description: Transportation Research Board Annual Meeting
   year: 2027
   link: https://trb-annual-meeting.nationalacademies.org/
+  abstract_deadline: 
   deadline:
     - "2026-08-01 23:59"
   comment: Paper submission deadline.
