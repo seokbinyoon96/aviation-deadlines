@@ -1,3 +1,13 @@
+- name: IEEE ITSC
+  description: IEEE International Conference on Intelligent Transportation Systems
+  year: 2027
+  link: https://ieee-itsc.org/2027/
+  abstract_deadline:
+  deadline:
+    - "2027-03-01 20:00"
+  date: "September 15-18"
+  place: Boston, MA, USA
+  
 - name: OpenSky Symposium
   description: OpenSky Symposium
   year: 2026
