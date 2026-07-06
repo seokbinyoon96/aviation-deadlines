@@ -81,24 +81,3 @@ The _deadline_ field can contain:
 On the page, all deadlines are displayed in viewer's local time (that's a feature).
 
 _Note:_ If the deadline hour is `{h}:00`, it will be automatically translated into `{h-1}:59:59` to avoid pain and confusion when it happens to be midnight in local time.
-
-### Timezones
-
-The timezone is specified in [tz format][1]. Unlike abbreviations (e.g. EST), these are un-ambiguous. Here are tz codes for some common timezones:
-
-| Common name                   | tz                                                               |
-| ----------------------------- | ---------------------------------------------------------------- |
-| UTC                           | `Etc/UTC`                                                        |
-| America Pacific Time          | `America/Los_Angeles`                                            |
-| Pacific Standard Time (UTC-8) | `Etc/GMT+8` (Yes, the sign is inverted for some weird reason)    |
-| America Eastern Time          | `America/New_York`                                               |
-| Eastern Standard Time (UTC-5) | `Etc/GMT+5`                                                      |
-| American Samoa Time (UTC-11)  | `Pacific/Samoa` or `Etc/GMT+11`. This timezone does not use DST. |
-| Aleutian Islands              | `America/Adak`                                                   |
-
-[0]: https://momentjs.com/timezone/docs/#/zone-object/offset/
-[1]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[2]: https://www.timeanddate.com/time/zones/aoe
-[3]: _data/types.yml
-[4]: #deadline-format
-[5]: #timezones
