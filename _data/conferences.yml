@@ -14,8 +14,7 @@
   link: https://scitech.aiaa.org/
   abstract_deadline: "2026-05-21 20:00"
   deadline:
-    - "2026-05-21 20:00"
-  comment: Extended abstract submission deadline (ET).
+    - "2026-12-01 20:00"
   date: "January 11-15"
   place: Orlando, Florida, USA
 
@@ -23,19 +22,19 @@
   description: AIAA AVIATION Forum
   year: 2027
   link: https://www.aiaa.org/aviation
-  abstract_deadline: "2026-05-21 20:00"
+  abstract_deadline: "2026-11-13 20:00"
   deadline:
-    - "2027-02-05 20:00"
+    - "2027-05-05 20:00"
   date: "June 2027"
   place: San Diego, California, USA
 
 - name: DASC
   description: IEEE/AIAA Digital Avionics Systems Conference
   year: 2026
-  link: https://2026.dasconline.org/
-  abstract_deadline: "2026-05-21 20:00"
+  link: https://dasconline.org/2026
+  abstract_deadline: "2026-02-07 20:00"
   deadline:
-    - "2026-03-02 23:59"
+    - "2026-05-02 23:59"
   date: "September 15-17"
   place: Orlando, Florida, USA
 
@@ -43,10 +42,9 @@
   description: Integrated Communications, Navigation and Surveillance Conference
   year: 2027
   link: https://i-cns.org/
-  abstract_deadline: 
+  abstract_deadline: "2027-01-15 20:00"
   deadline:
     - "2027-03-02 23:59"
-  comment: Full paper deadline.
   date: "April 2027"
   place: Herndon, Virginia, USA
 
@@ -57,14 +55,13 @@
   abstract_deadline: 
   deadline:
     - "2027-02-16 23:59"
-  comment: Estimated based on previous symposium.
   date: "June 2027"
   place: TBD
 
 - name: SESAR Innovation Days
   description: SESAR Innovation Days
   year: 2026
-  link: https://www.sesarju.eu/SID2026
+  link: https://www.sesarju.eu/SIDS2026
   abstract_deadline: 
   deadline:
     - "2026-09-21 23:59"
@@ -88,6 +85,5 @@
   abstract_deadline: 
   deadline:
     - "2026-08-01 23:59"
-  comment: Paper submission deadline.
   date: "January 2027"
   place: Washington, DC, USA
