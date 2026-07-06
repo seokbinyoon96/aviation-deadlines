@@ -69,9 +69,19 @@
                       {% else %}
                       Deadline:
                       {% endif %}
+                    <div class="meta">
+                      Abstract Deadline:
+                      {% if conf.abstract_deadline %}
+                        {{ conf.abstract_deadline }}
+                      {% else %}
+                        None
+                      {% endif %}
+                    </div>
+                    
                     <span class="deadline-time">
                       {{ deadline }}
                     </span>
+                    
                     <div class="meta">
                       {{ conf.comment }}
                     </div>
