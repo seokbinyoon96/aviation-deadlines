@@ -1,14 +1,12 @@
-title: Security and Privacy Conference Deadlines
-description: Countdowns to top Security and Privacy conference deadlines.
-author: Bogdan Kulynych
+title: Aviation Conference Deadlines
+description: Countdowns to Aviation conference deadlines.
+author: Seokbin Yoon
 
-domain: "sec-deadlines.github.io"
-baseurl: ""
+domain: "seokbinyoon96.github.io"
+baseurl: "/aviation-deadlines"
 
-twitter_username: hiddenmarkov
-github_username: sec-deadlines
-github_repo: sec-deadlines
-ga_id: UA-104921371-1
+github_username: seokbinyoon96
+github_repo: aviation-deadlines
+#ga_id: UA-104921371-1
 
 markdown: kramdown
-
