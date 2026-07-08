@@ -1,3 +1,13 @@
+- name: IEEE IV
+  description: IEEE Intelligent Vehicles Symposium
+  year: 2027
+  link: https://ieee-iv.org/2027/
+  abstract_deadline:
+  deadline:
+    - "2026-11-15 20:00"
+  date: "June 15-18 2027"
+  place: Perth, Western Australia
+
 - name: IEEE ITSC
   description: IEEE Intelligent Transportation Systems Conference
   year: 2027
