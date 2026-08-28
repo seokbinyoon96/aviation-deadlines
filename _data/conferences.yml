@@ -45,7 +45,7 @@
   abstract_deadline: "2026-11-13 20:00"
   deadline:
     - "2027-05-05 20:00"
-  date: "June 2027"
+  date: "June 7-11 2027"
   place: San Diego, California, USA
 
 - name: DASC
@@ -65,7 +65,7 @@
   abstract_deadline: "2027-01-15 20:00"
   deadline:
     - "2027-03-02 23:59"
-  date: "April 2027"
+  date: "April 6-8 2027"
   place: Herndon, Virginia, USA
 
 - name: ATRDS
@@ -95,7 +95,7 @@
   abstract_deadline: 
   deadline:
     - "2026-10-15 23:59"
-  date: "January 2027"
+  date: "January 27-29 2027"
   place: Nanyang Technological University, Singapore
 
 - name: TRB Annual Meeting
