@@ -7,6 +7,8 @@
     - "2026-11-15 20:00"
   date: "June 15-18 2027"
   place: Perth, Western Australia
+  lat: -31.9505
+  lng: 115.8605
 
 - name: IEEE ITSC
   description: IEEE Intelligent Transportation Systems Conference
@@ -17,7 +19,9 @@
     - "2027-03-01 20:00"
   date: "September 15-18 2027"
   place: Boston, MA, USA
-  
+  lat: 42.3601
+  lng: -71.0589
+
 - name: OpenSky Symposium
   description: OpenSky Symposium
   year: 2026
@@ -27,6 +31,8 @@
     - "2026-10-22 20:00"
   date: "October 29-30 2026"
   place: Madrid, Spain
+  lat: 40.4168
+  lng: -3.7038
 
 - name: AIAA SciTech
   description: AIAA SciTech Forum
@@ -37,6 +43,8 @@
     - "2026-12-01 20:00"
   date: "January 11-15 2027"
   place: Orlando, Florida, USA
+  lat: 28.5383
+  lng: -81.3792
 
 - name: AIAA AVIATION
   description: AIAA AVIATION Forum
@@ -47,6 +55,8 @@
     - "2027-05-05 20:00"
   date: "June 7-11 2027"
   place: San Diego, California, USA
+  lat: 32.7157
+  lng: -117.1611
 
 - name: DASC
   description: IEEE/AIAA Digital Avionics Systems Conference
@@ -57,6 +67,8 @@
     - "2026-05-02 23:59"
   date: "September 15-17 2026"
   place: Orlando, Florida, USA
+  lat: 28.5383
+  lng: -81.3792
 
 - name: ICNS
   description: Integrated Communications, Navigation and Surveillance Conference
@@ -67,73 +79,89 @@
     - "2027-03-02 23:59"
   date: "April 6-8 2027"
   place: Herndon, Virginia, USA
+  lat: 38.9696
+  lng: -77.3861
 
 - name: ATRDS
   description: US-Europe Air Transportation Research and Development Symposium
   year: 2027
   link: https://www.atrdsymposium.org/
-  abstract_deadline: 
+  abstract_deadline:
   deadline:
     - "2027-02-16 23:59"
   date: "June 2027"
   place: Bucharest, Romania
+  lat: 44.4268
+  lng: 26.1025
 
 - name: SESAR Innovation Days
   description: SESAR Innovation Days
   year: 2026
   link: https://www.sesarju.eu/SIDS2026
-  abstract_deadline: 
+  abstract_deadline:
   deadline:
     - "2026-09-21 23:59"
   date: "December 7-11 2026"
   place: Ireland
+  lat: 53.3498
+  lng: -6.2603
 
 - name: AICAP
   description: Aviation Innovation Conference for Asia Pacific
   year: 2027
   link: https://event.ntu.edu.sg/AICAP-2027
-  abstract_deadline: 
+  abstract_deadline:
   deadline:
     - "2026-10-30 23:59"
   date: "January 27-29 2027"
   place: Nanyang Technological University, Singapore
+  lat: 1.3483
+  lng: 103.6831
 
 - name: TRB Annual Meeting
   description: Transportation Research Board Annual Meeting
   year: 2027
   link: https://trb-annual-meeting.nationalacademies.org/
-  abstract_deadline: 
+  abstract_deadline:
   deadline:
     - "2026-08-01 23:59"
   date: "January 2027"
   place: Washington, DC, USA
+  lat: 38.9072
+  lng: -77.0369
 
 - name: IWAC
   description: International Workshop on ATM/CNS
   year: 2026
   link: https://iwac.enri.go.jp/
   abstract_deadline: "2026-05-15 23:59"
-  deadline: 
+  deadline:
     - "2026-08-31 23:59"
   date: "November 17-19 2026"
   place: Tokyo, Japan
+  lat: 35.6762
+  lng: 139.6503
 
 - name: ATRS
   description: Air Transport Research Society World Conference
   year: 2026
   link: https://www.atrsworld.org/
   abstract_deadline: "2026-02-25 23:59"
-  deadline: 
+  deadline:
     - "2026-05-01 23:59"
   date: "July 1-4 2026"
   place: Beijing, China
+  lat: 39.9042
+  lng: 116.4074
 
 - name: APISAT
   description: Asia-Pacific International Symposium on Aerospace Technology
   year: 2026
   link: https://smartconf.jp/content/apisat2026/
   abstract_deadline: "2026-05-22 23:59"
-  deadline: 
+  deadline:
     - "2026-07-24 23:59"
   date: "October 27-29 2026"
   place: Sapporo, Japan
+  lat: 43.0618
+  lng: 141.3545
