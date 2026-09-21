@@ -97,3 +97,72 @@ a:hover, a:focus {
 footer {
   margin-bottom: 2em;
 }
+
+.view-tabs {
+  margin: 1em 0;
+}
+
+.view-tab {
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+  padding: 6px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.view-tab.active {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+#conf-map {
+  height: 480px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.map-hint {
+  margin-top: 0.75em;
+  color: #808080;
+  font-size: 13px;
+}
+
+.map-popup {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.popup-place {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #808080;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+.popup-conf {
+  margin-bottom: 4px;
+}
+
+.popup-date {
+  color: #808080;
+}
+
+.popup-row {
+  margin-top: 2px;
+}
+
+.popup-timer {
+  font-weight: 600;
+}
+
+.popup-sep {
+  margin: 8px 0;
+  border-color: #eee;
+}
