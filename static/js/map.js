@@ -135,8 +135,9 @@
   }
 
   function markerText(name) {
-    if (name.length <= 5) return name;
-    return name.split(/\s+/).map(function(word) { return word.charAt(0); }).join("").slice(0, 4);
+    var compact = name.replace(/^(IEEE|AIAA)\s+/, '');
+    if (compact.length <= 8) return compact;
+    return compact.split(/\s+/).map(function(word) { return word.charAt(0); }).join("").slice(0, 5);
   }
 
   function renderDeadlineList(groups, map) {
@@ -223,10 +224,9 @@
     window.confMap = map;
     L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-      subdomains: 'abcd',
-      maxZoom: 18
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 19
     }).addTo(map);
 
     var groups = upcomingGroups(CONFERENCES);

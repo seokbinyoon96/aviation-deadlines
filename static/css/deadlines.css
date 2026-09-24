@@ -328,6 +328,10 @@ footer {
 .conference-marker.urgent { background: #c34f42; }
 .conference-marker.soon { background: #d9872f; }
 
+.leaflet-tile-pane {
+  filter: grayscale(0.7) saturate(0.6) brightness(1.05);
+}
+
 .leaflet-container,
 .leaflet-control,
 .leaflet-tooltip,
