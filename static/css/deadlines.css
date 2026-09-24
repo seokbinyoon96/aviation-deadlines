@@ -55,20 +55,23 @@ h2 {
   gap: 28px;
 }
 
-.eyebrow {
-  color: #2f7188;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-}
-
 .hero-copy {
   max-width: 680px;
   margin: 0;
   color: #5d6978;
   font-size: 16px;
   text-align: left;
+}
+
+.maintainer {
+  margin: 8px 0 0;
+  color: #7a8695;
+  font-size: 13px;
+  text-align: left;
+}
+
+.maintainer a {
+  color: #536b7d;
 }
 
 .hero-meta {
