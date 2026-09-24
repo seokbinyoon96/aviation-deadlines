@@ -146,7 +146,7 @@
 
     var sorted = groups.slice().sort(function(a, b) {
       return a.entries[0].next.at.valueOf() - b.entries[0].next.at.valueOf();
-    }).slice(0, 6);
+    });
 
     mount.innerHTML = '';
     sorted.forEach(function(group) {
@@ -229,6 +229,35 @@
       maxZoom: 19
     }).addTo(map);
 
+    // Keep major country names readable in the world overview. Native tile
+    // labels take over when zooming in; this pane never intercepts clicks.
+    map.createPane('countryNames');
+    map.getPane('countryNames').style.zIndex = 450;
+    map.getPane('countryNames').style.pointerEvents = 'none';
+    var countryNames = L.layerGroup();
+    [
+      ['Canada', 59, -106], ['United States', 38, -101],
+      ['Mexico', 23, -102], ['Brazil', -10, -52], ['Argentina', -38, -65],
+      ['United Kingdom', 58, -8], ['Spain', 37, -5], ['France', 47, 1],
+      ['Germany', 52, 13], ['Romania', 44, 29], ['Russia', 61, 94],
+      ['Egypt', 27, 30], ['Algeria', 27, 3], ['Nigeria', 9, 8],
+      ['South Africa', -29, 24], ['Saudi Arabia', 23, 45],
+      ['India', 22, 79], ['China', 36, 102], ['Japan', 39, 141],
+      ['Indonesia', -5, 119], ['Australia', -25, 134]
+    ].forEach(function(country) {
+      L.marker([country[1], country[2]], {
+        pane: 'countryNames', interactive: false, keyboard: false,
+        icon: L.divIcon({className: 'country-name', html: escapeHtml(country[0]),
+          iconSize: [100, 18], iconAnchor: [50, 9]})
+      }).addTo(countryNames);
+    });
+    function updateCountryNames() {
+      if (map.getZoom() <= 3) countryNames.addTo(map);
+      else map.removeLayer(countryNames);
+    }
+    map.on('zoomend', updateCountryNames);
+    updateCountryNames();
+
     var groups = upcomingGroups(CONFERENCES);
     if (!groups.length) {
       var hint = document.querySelector('.map-hint');
@@ -238,13 +267,13 @@
       var first = group.entries[0];
       var marker = L.marker([group.lat, group.lng], {
         title: first.conf.name + ' — ' + group.place,
+        alt: first.conf.name + ' — ' + group.place,
         icon: L.divIcon({
           className: 'conference-marker-wrap',
-          html: '<span class="conference-marker ' + urgencyClass(first.next.at) + '">' +
-            escapeHtml(markerText(first.conf.name)) + '</span>',
-          iconSize: [64, 30],
-          iconAnchor: [32, 15],
-          popupAnchor: [0, -18]
+          html: '<span class="conference-marker ' + urgencyClass(first.next.at) + '"></span>',
+          iconSize: [24, 24],
+          iconAnchor: [12, 12],
+          popupAnchor: [0, -10]
         })
       }).addTo(map);
       group.marker = marker;
@@ -254,6 +283,12 @@
         direction: 'top',
         className: 'pin-label',
         opacity: 1
+      });
+      marker.on('popupopen', function() {
+        marker.getElement().classList.add('is-selected');
+      });
+      marker.on('popupclose', function() {
+        marker.getElement().classList.remove('is-selected');
       });
     });
     renderDeadlineList(groups, map);
