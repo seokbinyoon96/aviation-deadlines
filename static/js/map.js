@@ -242,9 +242,9 @@
           className: 'conference-marker-wrap',
           html: '<span class="conference-marker ' + urgencyClass(first.next.at) + '">' +
             escapeHtml(markerText(first.conf.name)) + '</span>',
-          iconSize: [42, 42],
-          iconAnchor: [21, 21],
-          popupAnchor: [0, -24]
+          iconSize: [64, 30],
+          iconAnchor: [32, 15],
+          popupAnchor: [0, -18]
         })
       }).addTo(map);
       group.marker = marker;
