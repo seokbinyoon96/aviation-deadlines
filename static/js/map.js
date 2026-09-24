@@ -163,7 +163,7 @@
           escapeHtml(formatShort(entry.next.at)) +
         '</span>';
       button.addEventListener('click', function() {
-        map.flyTo([group.lat, group.lng], Math.max(map.getZoom(), 5), { duration: 0.5 });
+        map.panTo([group.lat, group.lng], { animate: true, duration: 0.45 });
         group.marker.openPopup();
       });
       mount.appendChild(button);
