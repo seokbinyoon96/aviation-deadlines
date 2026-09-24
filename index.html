@@ -20,38 +20,40 @@
 
     <div class="container">
       <div class="page-header">
-        <div class="row">
-          <div class="col-xs-12 col-sm-8">
-            <h1>
-              {{ site.title }}
-            </h1>
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Aviation research calendar</div>
+            <h1>{{ site.title }}</h1>
+            <p class="hero-copy">Track the next submission deadlines for aviation, air traffic management, and intelligent transportation conferences.</p>
           </div>
-
-          <div class="col-xs-12">
-            {{ site.description }}
-            <p>If you notice any missing conferences, please email me at <a href="mailto:seokbinyoon96@gmail.com">seokbinyoon96@gmail.com</a>.</p>
-            <p>Last update: {{ site.time | date: "%-d %B %Y" }}</p>
-
-            <div>
-              <p>
-                Deadlines as iCal:
-                <a href="{{site.baseurl}}/ical/deadlines-all.ical">all</a>
-              </p>
-            </div>
+          <div class="hero-meta" aria-label="Page information">
+            <span>Updated {{ site.time | date: "%-d %B %Y" }}</span>
+            <a href="{{site.baseurl}}/ical/deadlines-all.ical">Add all to calendar</a>
+            <a href="mailto:seokbinyoon96@gmail.com">Suggest an update</a>
           </div>
         </div>
 
-        <div class="view-tabs">
-          <button type="button" class="view-tab active" data-view="map">Map</button>
-          <button type="button" class="view-tab" data-view="list">List</button>
+        <div class="view-tabs" role="tablist" aria-label="Conference views">
+          <button type="button" class="view-tab active" data-view="map" role="tab" aria-selected="true">Map</button>
+          <button type="button" class="view-tab" data-view="list" role="tab" aria-selected="false">List</button>
         </div>
-
-        <hr>
       </div>
 
       <div id="view-map">
-        <div id="conf-map"></div>
-        <p class="meta map-hint">Each pin counts down to that venue's next deadline. Click one for the full abstract / full paper countdown. Venues whose deadlines have all passed only appear in the List tab.</p>
+        <div class="map-shell">
+          <div id="conf-map" aria-label="Map of upcoming aviation conferences"></div>
+          <aside class="map-sidebar" aria-labelledby="next-deadlines-title">
+            <div class="sidebar-heading">
+              <span class="live-dot" aria-hidden="true"></span>
+              <div>
+                <h2 id="next-deadlines-title">Next deadlines</h2>
+                <p>Select a conference to find it on the map.</p>
+              </div>
+            </div>
+            <div id="map-deadline-list"></div>
+          </aside>
+        </div>
+        <p class="meta map-hint">Select a marker for complete abstract and paper deadlines. Conferences with no upcoming deadline remain available in List.</p>
       </div>
 
       <div id="view-list" style="display:none">
@@ -131,7 +133,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data-10-year-range.min.js" integrity="sha512-d11VXfxQMn+sZuIgzHITdIuInr4cVRGV/uLiSI643WH/J+p4gPFYSHXRMR2v+w4Rn2TSyzJjsZjc0M7+Qd+UXw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/2.0.12/store.legacy.min.js" integrity="sha512-3yZTInL4yLU1ajnca35KTk6YE4RPHJU2y+jbhHAykE9OzMHpc2BIJghNsbkBNacIJWLLUmUkLEGPDDWrFY2zzw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2" integrity="sha384-zPE55eyESN+FxCWGEnlNxGyAPJud6IZ6TtJmXb56OFRGhxZPN4akj9rjA3gw5Qqa" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="{{ site.baseurl}}/static/js/main.js" async></script>
     <script src="{{ site.baseurl}}/static/js/map.js"></script>
@@ -147,6 +148,9 @@
 
             tabs.forEach(function(t) { t.classList.remove('active'); });
             tab.classList.add('active');
+            tabs.forEach(function(t) {
+              t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+            });
 
             Object.keys(views).forEach(function(key) {
               views[key].style.display = (key === target) ? 'block' : 'none';

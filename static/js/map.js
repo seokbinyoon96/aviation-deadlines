@@ -52,7 +52,7 @@
     if (diffMs <= 0) return "Passed — " + target.local().format('D MMM YYYY, h:mm a');
 
     var dur = moment.duration(diffMs);
-    return Math.floor(dur.asDays()) + "d " + dur.hours() + "h " + dur.minutes() + "m " + dur.seconds() + "s";
+    return Math.floor(dur.asDays()) + "d " + dur.hours() + "h " + dur.minutes() + "m";
   }
 
   // Short form for the always-visible pin label: "71d", or hours on the last day.
@@ -134,6 +134,41 @@
       '</span>';
   }
 
+  function markerText(name) {
+    if (name.length <= 5) return name;
+    return name.split(/\s+/).map(function(word) { return word.charAt(0); }).join("").slice(0, 4);
+  }
+
+  function renderDeadlineList(groups, map) {
+    var mount = document.getElementById('map-deadline-list');
+    if (!mount) return;
+
+    var sorted = groups.slice().sort(function(a, b) {
+      return a.entries[0].next.at.valueOf() - b.entries[0].next.at.valueOf();
+    }).slice(0, 6);
+
+    mount.innerHTML = '';
+    sorted.forEach(function(group) {
+      var entry = group.entries[0];
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'deadline-card';
+      button.innerHTML = '' +
+        '<span class="deadline-card-main">' +
+          '<strong>' + escapeHtml(entry.conf.name) + ' ' + escapeHtml(entry.conf.year) + '</strong>' +
+          '<span>' + escapeHtml(shortPlace(group.place)) + '</span>' +
+        '</span>' +
+        '<span class="deadline-card-time ' + urgencyClass(entry.next.at) + '" data-short="' + entry.next.at.toISOString() + '">' +
+          escapeHtml(formatShort(entry.next.at)) +
+        '</span>';
+      button.addEventListener('click', function() {
+        map.flyTo([group.lat, group.lng], Math.max(map.getZoom(), 5), { duration: 0.5 });
+        group.marker.openPopup();
+      });
+      mount.appendChild(button);
+    });
+  }
+
   // Only venues with a deadline still ahead of us belong on the map.
   function upcomingGroups(confs) {
     var groups = {};
@@ -161,42 +196,6 @@
     });
   }
 
-  // Leaflet fixes a tooltip's side when it is bound, so pick sides up front that
-  // keep the always-on labels from stacking on top of each other.
-  function assignDirections(map, groups) {
-    var placed = [];
-    var order = groups.slice().sort(function(a, b) {
-      return a.entries[0].next.at.valueOf() - b.entries[0].next.at.valueOf();
-    });
-
-    order.forEach(function(group) {
-      var point = map.latLngToContainerPoint([group.lat, group.lng]);
-      var chars = Math.max(
-        group.entries[0].conf.name.length + 5,
-        shortPlace(group.place).length + (group.entries.length > 1 ? 9 : 0)
-      );
-      var w = chars * 6.2 + 18;
-      var h = 34;
-
-      var candidates = {
-        top: [point.x - w / 2, point.y - 44 - h, point.x + w / 2, point.y - 44],
-        bottom: [point.x - w / 2, point.y + 4, point.x + w / 2, point.y + 4 + h],
-        right: [point.x + 14, point.y - 20 - h / 2, point.x + 14 + w, point.y - 20 + h / 2],
-        left: [point.x - 14 - w, point.y - 20 - h / 2, point.x - 14, point.y - 20 + h / 2]
-      };
-
-      var chosen = ["top", "bottom", "right", "left"].filter(function(dir) {
-        var r = candidates[dir];
-        return !placed.some(function(p) {
-          return r[0] < p[2] && r[2] > p[0] && r[1] < p[3] && r[3] > p[1];
-        });
-      })[0] || "top";
-
-      placed.push(candidates[chosen]);
-      group.direction = chosen;
-    });
-  }
-
   function updateTimers() {
     document.querySelectorAll('.leaflet-popup-content .popup-timer').forEach(function(el) {
       var iso = el.getAttribute('data-target');
@@ -204,7 +203,7 @@
       el.textContent = formatRemaining(moment(iso));
     });
 
-    document.querySelectorAll('.pin-days').forEach(function(el) {
+    document.querySelectorAll('.pin-days, .deadline-card-time').forEach(function(el) {
       var iso = el.getAttribute('data-short');
       if (!iso) return;
       el.textContent = formatShort(moment(iso));
@@ -215,18 +214,19 @@
     var mapEl = document.getElementById('conf-map');
     if (!mapEl) return;
 
-    var map = L.map('conf-map', { scrollWheelZoom: false, minZoom: 2 }).setView([25, 10], 2);
+    var map = L.map('conf-map', {
+      scrollWheelZoom: false,
+      minZoom: 2,
+      preferCanvas: true,
+      zoomControl: false
+    }).setView([25, 10], 2);
     window.confMap = map;
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-      attribution: 'Tiles &copy; Esri',
-      maxZoom: 16
-    }).addTo(map);
-
-    // Place names: continents when zoomed out, countries and cities as you zoom in.
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
-      className: 'map-labels',
-      maxZoom: 16
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+      subdomains: 'abcd',
+      maxZoom: 18
     }).addTo(map);
 
     var groups = upcomingGroups(CONFERENCES);
@@ -234,24 +234,38 @@
       var hint = document.querySelector('.map-hint');
       if (hint) hint.textContent = "No upcoming deadlines right now — see the List tab for past ones.";
     }
-    assignDirections(map, groups);
-
     groups.forEach(function(group) {
-      var marker = L.marker([group.lat, group.lng], { title: group.place }).addTo(map);
+      var first = group.entries[0];
+      var marker = L.marker([group.lat, group.lng], {
+        title: first.conf.name + ' — ' + group.place,
+        icon: L.divIcon({
+          className: 'conference-marker-wrap',
+          html: '<span class="conference-marker ' + urgencyClass(first.next.at) + '">' +
+            escapeHtml(markerText(first.conf.name)) + '</span>',
+          iconSize: [42, 42],
+          iconAnchor: [21, 21],
+          popupAnchor: [0, -24]
+        })
+      }).addTo(map);
+      group.marker = marker;
       marker.bindPopup(function() { return buildPopupHtml(group); }, { maxWidth: 280 });
       marker.bindTooltip(buildLabelHtml(group), {
-        permanent: true,
-        direction: group.direction,
+        permanent: false,
+        direction: 'top',
         className: 'pin-label',
         opacity: 1
       });
     });
+    renderDeadlineList(groups, map);
 
     // The container's real size isn't always settled the instant the map is
     // created (fonts/CSS still applying), which throws off marker projection.
     setTimeout(function() { map.invalidateSize(); }, 0);
     window.addEventListener('load', function() { map.invalidateSize(); });
 
-    setInterval(updateTimers, 1000);
+    setInterval(updateTimers, 60000);
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) updateTimers();
+    });
   });
 })();
