@@ -108,6 +108,7 @@
         '</strong></a><br>' +
         '<span class="popup-date">' + escapeHtml(conf.date) + '</span>' +
         rows +
+        (conf.comment ? '<div class="popup-date">' + escapeHtml(conf.comment) + '</div>' : '') +
       '</div>';
   }
 
