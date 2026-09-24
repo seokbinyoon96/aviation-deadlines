@@ -279,8 +279,8 @@
       group.marker = marker;
       marker.bindPopup(function() { return buildPopupHtml(group); }, { maxWidth: 280 });
       marker.bindTooltip(buildLabelHtml(group), {
-        permanent: false,
-        direction: 'top',
+        permanent: true,
+        direction: 'right',
         className: 'pin-label',
         opacity: 1
       });
@@ -291,6 +291,41 @@
         marker.getElement().classList.remove('is-selected');
       });
     });
+    // Position persistent names after panning/zooming, preferring the closest
+    // free spot to each venue. The dot remains at the true geographic location.
+    function layoutLabels() {
+      var occupied = [];
+      var size = map.getSize();
+      groups.forEach(function(group) {
+        var tip = group.marker.getTooltip();
+        var node = tip.getElement();
+        if (!node) return;
+        var point = map.latLngToContainerPoint(group.marker.getLatLng());
+        var width = node.offsetWidth;
+        var height = node.offsetHeight;
+        var chosen = null;
+        for (var ring = 0; ring < 12 && !chosen; ring++) {
+          var dy = ring === 0 ? 0 : Math.ceil(ring / 2) * (height + 6) * (ring % 2 ? 1 : -1);
+          [12, -width - 12].some(function(dx) {
+            var box = {x: point.x + dx, y: point.y + dy - height / 2, w: width, h: height};
+            if (box.x < 4 || box.x + width > size.x - 4 || box.y < 4 || box.y + height > size.y - 4) return false;
+            if (occupied.some(function(other) {
+              return box.x < other.x + other.w + 5 && box.x + box.w + 5 > other.x &&
+                box.y < other.y + other.h + 5 && box.y + box.h + 5 > other.y;
+            })) return false;
+            chosen = {dx: dx, dy: dy, box: box};
+            return true;
+          });
+        }
+        if (chosen) {
+          occupied.push(chosen.box);
+          tip.options.offset = L.point(chosen.dx, chosen.dy);
+          tip.setLatLng(group.marker.getLatLng());
+        }
+      });
+    }
+    map.on('moveend zoomend resize', layoutLabels);
+    requestAnimationFrame(layoutLabels);
     renderDeadlineList(groups, map);
 
     // The container's real size isn't always settled the instant the map is
