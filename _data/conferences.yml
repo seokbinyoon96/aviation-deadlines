@@ -130,6 +130,18 @@
   lat: 38.9072
   lng: -77.0369
 
+- name: ICUAS
+  description: International Conference on Unmanned Aircraft Systems
+  year: 2027
+  link: https://uasconferences.com/2027_icuas/
+  deadline:
+    - "2027-02-05 23:59"
+  comment: "Official deadline: February 5. Time and timezone are not specified; countdown uses 23:59 AoE as a placeholder. Confirm the cutoff with the organizer."
+  date: "June 14-17 2027"
+  place: Fortaleza, Brazil
+  lat: -3.7327
+  lng: -38.5270
+
 - name: IWAC
   description: International Workshop on ATM/CNS
   year: 2026
