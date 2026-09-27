@@ -7,6 +7,6 @@ baseurl: "/aviation-deadlines"
 
 github_username: seokbinyoon96
 github_repo: aviation-deadlines
-#ga_id: UA-104921371-1
+google_analytics: G-NB4NSS4EK3
 
 markdown: kramdown
